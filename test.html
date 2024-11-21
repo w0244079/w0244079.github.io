@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSCode + Git in the Browser</title>
+    <script src="https://cdn.jsdelivr.net/npm/@webcontainers/api@latest/dist/webcontainers.min.js"></script>
+</head>
+<body>
+    <h1>VSCode with Git in the Browser</h1>
+
+    <!-- Embed VSCode Web -->
+    <iframe src="https://vscode.dev" width="100%" height="600px" style="border: none;"></iframe>
+
+    <script>
+        // Initialize WebContainer (if needed for Git support)
+        WebContainer.boot().then(container => {
+            // Set up your virtual file system or mount directories
+            container.fs.mount("/workspace", new WebContainer.Vfs());
+            // Start a Git environment inside the WebContainer
+            container.spawn("git", ["init"]);
+            // Run other Git commands as necessary
+        });
+    </script>
+</body>
+</html>
