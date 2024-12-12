@@ -1,18 +1,10 @@
 import request from 'supertest';
 import { beforeAll, afterAll, describe, it, expect } from '@jest/globals';
+import { app } from '../app.js';
 
 let server;
 
 beforeAll(async (done) => {
-  // Dynamically import the app (since it's not exported explicitly)
-  //const { default: app } = await import('../app.js'); // Adjust path as needed
-
-  const theApp = await import('../app.js');
-  const app = theApp.app;
-
-  console.log('APP');
-  console.log(app);
-  
   // Start the server
   server = app.listen(3000, () => {
     console.log('Test server running on port 3000');
