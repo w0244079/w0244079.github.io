@@ -14,6 +14,7 @@ describe('GET /api/tracks/:id', () => {
     const response = await request(app).get(`/api/tracks/${trackId}`);
 
     expect(response.status).toBe(200);
+    console.log(response.body)
     expect(response.body).toEqual(expectedTrack); // Match the actual data from the DB
   });
 
