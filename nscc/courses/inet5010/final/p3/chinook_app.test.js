@@ -7,6 +7,9 @@ beforeAll(async (done) => {
   // Dynamically import the app (since it's not exported explicitly)
   const { default: app } = await import('../app.js'); // Adjust path as needed
 
+  console.log('APP');
+  console.log(app);
+  
   // Start the server
   server = app.listen(3000, () => {
     console.log('Test server running on port 3000');
