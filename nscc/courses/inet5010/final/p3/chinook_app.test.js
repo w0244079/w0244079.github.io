@@ -1,23 +1,27 @@
 import request from 'supertest';
-import app from '../app'; // Import your Express app
+import { beforeAll, afterAll, describe, it, expect } from '@jest/globals';
 
 let server;
 
-beforeAll((done) => {
-  // Start the app server
+beforeAll(async (done) => {
+  // Dynamically import the app (since it's not exported explicitly)
+  const { default: app } = await import('../app.js'); // Adjust path as needed
+
+  // Start the server
   server = app.listen(3000, () => {
     console.log('Test server running on port 3000');
-    done(); // Ensure Jest waits for the server to start before running the tests
+    done();
   });
 });
 
 afterAll((done) => {
-  // Shut down the server after all tests are finished
+  // Close the server after the tests are done
   server.close(() => {
     console.log('Test server shut down');
-    done(); // Ensure Jest waits for the server to shut down
+    done();
   });
 });
+
 
 describe('GET /api/tracks/:id', () => {
   it('should return a track when a valid ID is provided', async () => {
