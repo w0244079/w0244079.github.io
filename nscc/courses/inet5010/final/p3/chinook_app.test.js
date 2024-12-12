@@ -5,7 +5,10 @@ let server;
 
 beforeAll(async (done) => {
   // Dynamically import the app (since it's not exported explicitly)
-  const { default: app } = await import('../app.js'); // Adjust path as needed
+  //const { default: app } = await import('../app.js'); // Adjust path as needed
+
+  const theApp = await import('../app.js');
+  const app = theApp.app;
 
   console.log('APP');
   console.log(app);
