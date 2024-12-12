@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from './app'; // Your express app
+import app from '../app.js'; // Your express app
 
 describe('GET /api/tracks/:id', () => {
   it('should return a track when a valid ID is provided', async () => {
