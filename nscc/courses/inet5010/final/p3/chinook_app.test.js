@@ -1,5 +1,23 @@
 import request from 'supertest';
-import app from '../app.js'; // Your express app
+import app from '../app'; // Import your Express app
+
+let server;
+
+beforeAll((done) => {
+  // Start the app server
+  server = app.listen(3000, () => {
+    console.log('Test server running on port 3000');
+    done(); // Ensure Jest waits for the server to start before running the tests
+  });
+});
+
+afterAll((done) => {
+  // Shut down the server after all tests are finished
+  server.close(() => {
+    console.log('Test server shut down');
+    done(); // Ensure Jest waits for the server to shut down
+  });
+});
 
 describe('GET /api/tracks/:id', () => {
   it('should return a track when a valid ID is provided', async () => {
